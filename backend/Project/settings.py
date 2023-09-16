@@ -33,7 +33,8 @@ INSTALLED_APP = [
 ]
 THIRD_PARTY_APPS =  [
     'debug_toolbar', 
-    'rest_framework'
+    'rest_framework',
+    'rest_framework.authtoken'
 ]
 PROJECT_APP = [
     'authentication.apps.AuthenticationConfig'
@@ -149,6 +150,19 @@ DEBUG_TOOLBAR_CONFIG = {
     'SHOW_COLLAPSED': True,
     # Panel options
     'SQL_WARNING_THRESHOLD': 100,   # milliseconds
+}
+
+# DRF Setup
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication'
+    ),
+    'TOKEN_EXPIRED_AFTER_SECONDS': 600,
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.AllowAny',
+    ),
 }
 
 LOGS_DIR = '/mnt/logs'
