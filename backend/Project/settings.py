@@ -36,6 +36,7 @@ THIRD_PARTY_APPS =  [
     'rest_framework'
 ]
 PROJECT_APP = [
+    'authentication.apps.AuthenticationConfig'
 ]
 
 INSTALLED_APPS = INSTALLED_APP +  THIRD_PARTY_APPS + PROJECT_APP
