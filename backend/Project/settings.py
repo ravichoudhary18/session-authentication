@@ -165,6 +165,9 @@ REST_FRAMEWORK = {
     ),
 }
 
+# USER MODEL
+AUTH_USER_MODEL = 'authentication.User'
+
 LOGS_DIR = '/mnt/logs'
 if not os.path.exists(LOGS_DIR):
     os.mkdir(LOGS_DIR)
