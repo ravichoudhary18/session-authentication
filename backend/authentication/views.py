@@ -14,6 +14,7 @@ class LoginAPIView(APIView):
 
             # Authenticate user
             user = authenticate(request, username=username, password=password)
+            print(user)
 
             if user is not None:
                 # User is authenticated, generate and return a token
