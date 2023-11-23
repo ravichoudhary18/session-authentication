@@ -1,33 +1,34 @@
 import React, {useState} from 'react';
 import {TextField, Button} from '@mui/material';
 import useAxiosPrivate from '../../../hooks/useAxiosPrivate';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
 
     const [inputs, setInputes] = useState({
         username: '',
         password: '',
-        result: ''
     })
     const axiosPrivate = useAxiosPrivate()
+    const navigate = useNavigate()
 
     const loginHandler = (event) => {
         setInputes({...inputs, [event.target.name]: event.target.value})
     }
     const submitHandler = (event) => {
-        console.log("call");
         event.preventDefault()
         const data = {
             username: inputs.username,
             password: inputs.password
         }
-        axiosPrivate.post('/authentication/login/', data)
+        axiosPrivate.post('/authentication/login', data)
         .then((res) => {
-            console.log(res);
-            setInputes({...inputs.result})
+            localStorage.setItem('userInfo', JSON.stringify(res.data))
+            localStorage.setItem('token', JSON.stringify(res.data.token))
+            navigate('/')
         })
         .catch((error) => {
-            console.log(error.response);
+            console.log(error);
         })
     }
     return (
@@ -38,6 +39,7 @@ const Login = () => {
             variant="standard"
             label="Username"
             name='username'
+            value={inputs.username}
             onChange={loginHandler}
         />
         <TextField
@@ -48,6 +50,7 @@ const Login = () => {
             name='password'
             autoComplete="current-password"
             variant="standard"
+            value={inputs.password}
             onChange={loginHandler}
         />
         <Button 

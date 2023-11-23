@@ -159,11 +159,12 @@ DEBUG_TOOLBAR_CONFIG = {
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.SessionAuthentication',
-        'rest_framework.authentication.BasicAuthentication'
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
     ),
     'TOKEN_EXPIRED_AFTER_SECONDS': 600,
     'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.AllowAny',
+        'rest_framework.permissions.IsAuthenticated',
     ),
 }
 
@@ -205,3 +206,5 @@ LOGGING = {
         },
     },
 }
+
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'
